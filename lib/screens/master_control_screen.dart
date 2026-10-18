@@ -55,7 +55,7 @@ class _MasterControlScreenState extends State<MasterControlScreen> {
   bool _isOTAUploading = false; // 🟢 Biến cờ đánh dấu đang nạp OTA
   IOWebSocketChannel? _channel;
   String? localDownloadedBinPath;
-  bool _isConnected = false;
+  bool isConnected = false;
   Timer? _otaWatchdogTimer;
   List<Map<String, dynamic>> _enabledEffects = [
     {"cmd": "TOGGLE_EVEN_ODD", "name": "CHẮN / LẺ", "icon": Icons.auto_awesome_rounded},
@@ -751,7 +751,7 @@ void _connect() {
     );
     if (mounted) {
       setState(() {
-        _isConnected = false; // Tạm thời đặt false trong lúc chờ dữ liệu gửi về
+        isConnected = false; // Tạm thời đặt false trong lúc chờ dữ liệu gửi về
       });
     }
     _channel!.stream.listen(
@@ -759,7 +759,7 @@ void _connect() {
         debugPrint('[WS] Nhận dữ liệu từ ESP32: $data');
         if (mounted) {
           setState(() {
-            _isConnected = true; // Kết nối thành công khi bắt đầu nhận dữ liệu
+            isConnected = true; // Kết nối thành công khi bắt đầu nhận dữ liệu
           });
         }
       },
@@ -767,7 +767,7 @@ void _connect() {
         debugPrint('[WS] Lỗi kết nối WebSocket: $error');
         if (mounted) {
           setState(() {
-            _isConnected = false;
+            isConnected = false;
           });
           _handleDisconnection();
         }
@@ -776,7 +776,7 @@ void _connect() {
         debugPrint('[WS] Kết nối WebSocket đã đóng (onDone).');
         if (mounted) {
           setState(() {
-            _isConnected = false;
+            isConnected = false;
           });
           _handleDisconnection();
         }
@@ -787,7 +787,7 @@ void _connect() {
     debugPrint('[WS] Ngoại lệ khi khởi tạo kết nối WebSocket: $e');
     if (mounted) {
       setState(() {
-        _isConnected = false;
+        isConnected = false;
       });
       _handleDisconnection();
     }

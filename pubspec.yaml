@@ -52,6 +52,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1  # Thêm dòng này
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,18 +65,23 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_launcher_icons:
+  android: true
+  ios: true                           # Bắt buộc là true để hỗ trợ iOS
+  image_path: "assets/images/icon.png"
+  remove_alpha_ios: true               # NÊN THÊM: Xóa kênh Alpha (nền trong suốt) để tránh lỗi App Store
+# Cấu hình tự động cho Android (Adaptive Icons từ Android 8.0 trở lên)
+  adaptive_icon_background: "#FFFFFF" # Tự động tạo màu nền (ví dụ: mã màu Hex trắng, hoặc đường dẫn file ảnh nền)
+  adaptive_icon_foreground: "assets/images/icon.png" # Ảnh logo chính ở giữa
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/images/overview.jpg
-  - assets/images/building.jpg
-  - assets/images/floor.jpg
-  - assets/images/room.jpg
-  - assets/images/background.png
+    - assets/images/overview.jpg
+    - assets/images/building.jpg
+    - assets/images/floor.jpg
+    - assets/images/room.jpg
+    - assets/images/background.png
+    - assets/images/icon.png          # 👈 THÊM DÒNG NÀY VÀO
 
   # To add assets to your application, add an assets section, like this:
   # assets:
